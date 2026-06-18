@@ -30,6 +30,15 @@
                     {{ form.slug }}
                     <div class="mgr-help">{{ form.slug.help_text }}</div>
                     {% if form.slug.errors %}<div class="mgr-error">{{ form.slug.errors.0 }}</div>{% endif %}
+                    {% if object.pk %}
+                    <div class="mgr-help">
+                        Live link:
+                        <a href="{{ object.get_absolute_url }}" target="_blank" rel="noopener">
+                            {{ request.scheme }}://{{ request.get_host }}{{ object.get_absolute_url }}
+                        </a>
+                        {% if not object.is_published %}<em>(visible once published)</em>{% endif %}
+                    </div>
+                    {% endif %}
                 </div>
 
                 <div class="mgr-field" style="margin-bottom:0;">
